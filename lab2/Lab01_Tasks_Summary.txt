@@ -1,0 +1,167 @@
+==============================================================================
+                    LAB 02: WORKING WITH NUMPY (BROADCASTING)
+==============================================================================
+
+------------------------------------------------------------------------------
+TASK 1: Scalar Broadcasting Operation
+------------------------------------------------------------------------------
+[PYTHON CODE]
+import numpy as np
+
+matrix = np.array([[2, 4, 6], [8, 10, 12], [14, 16, 18]])
+result_task1 = matrix + 10
+
+print("Original 3x3 Array:\n", matrix)
+print("\nResult after adding scalar 10:\n", result_task1)
+
+[OUTPUT LOGS]
+Original 3x3 Array:
+ [[ 2  4  6]
+  [ 8 10 12]
+  [14 16 18]]
+
+Result after adding scalar 10:
+ [[12 14 16]
+  [18 20 22]
+  [24 26 28]]
+
+
+------------------------------------------------------------------------------
+TASK 2: Row-wise Vector Addition
+------------------------------------------------------------------------------
+[PYTHON CODE]
+import numpy as np
+
+table = np.arange(1, 13).reshape(4, 3)
+row = np.array([5, 15, 25])
+result_task2 = table + row
+
+print("Table shape:", table.shape)
+print("Row shape  :", row.shape)
+print("Result shape:", result_task2.shape)
+print("\nFinal Result Array:\n", result_task2)
+
+[OUTPUT LOGS]
+Table shape: (4, 3)
+Row shape  : (3,)
+Result shape: (4, 3)
+
+Final Result Array:
+ [[ 6 17 28]
+  [ 9 20 31]
+  [12 23 34]
+  [15 26 37]]
+
+
+------------------------------------------------------------------------------
+TASK 3: Diagnosing and Fixing Shape Mismatches
+------------------------------------------------------------------------------
+[PYTHON CODE]
+import numpy as np
+
+arr1 = np.ones((3, 4), dtype=int)
+arr2 = np.array([10, 20, 30])
+
+print("Attempting operation with shapes:", arr1.shape, "and", arr2.shape)
+try:
+    bad_sum = arr1 + arr2
+except ValueError as err:
+    print("Captured Expected Error:", err)
+
+# Fixing shape using reshape(-1, 1) to treat as column vector (3, 1)
+arr2_fixed = arr2.reshape(-1, 1)
+fixed_result = arr1 + arr2_fixed
+
+print("\nFixed Shape of second array:", arr2_fixed.shape)
+print("Final Result Array after broadcasting:\n", fixed_result)
+
+[OUTPUT LOGS]
+Attempting operation with shapes: (3, 4) and (3,)
+Captured Expected Error: operands could not be broadcast together with shapes (3,4) (3,) 
+
+Fixed Shape of second array: (3, 1)
+Final Result Array after broadcasting:
+ [[11 11 11 11]
+  [21 21 21 21]
+  [31 31 31 31]]
+
+
+------------------------------------------------------------------------------
+TASK 4: Data Centring via Vectorisation
+------------------------------------------------------------------------------
+[PYTHON CODE]
+import numpy as np
+
+np.random.seed(42)
+data_task4 = np.random.uniform(10.0, 50.0, size=(5, 2))
+
+col_means = data_task4.mean(axis=0)
+centred_data = data_task4 - col_means
+
+print("Original Array (5x2):\n", np.round(data_task4, 3))
+print("\nColumn Means (axis=0):", np.round(col_means, 3))
+print("\nCentred Result:\n", np.round(centred_data, 3))
+
+[OUTPUT LOGS]
+Original Array (5x2):
+ [[24.982 48.029]
+  [39.279 25.947]
+  [16.241 16.239]
+  [12.323 44.647]
+  [34.044 38.323]]
+
+Column Means (axis=0): [25.374 34.637]
+
+Centred Result:
+ [[ -0.392  13.391]
+  [ 13.905  -8.691]
+  [ -9.133 -18.398]
+  [-13.051  10.01 ]
+  [  8.67   3.685]]
+
+
+------------------------------------------------------------------------------
+TASK 5: Full Feature Standardisation
+------------------------------------------------------------------------------
+[PYTHON CODE]
+import numpy as np
+
+np.random.seed(101)
+raw_features = np.random.normal(loc=50, scale=15, size=(10, 3))
+
+# Single-line vectorised feature standardisation
+standardised_features = (raw_features - raw_features.mean(axis=0)) / raw_features.std(axis=0)
+
+print("Raw Feature Matrix (10x3):\n", np.round(raw_features, 2))
+print("\nStandardised Output Matrix:\n", np.round(standardised_features, 4))
+print("\nVerification - Means per column:", np.round(standardised_features.mean(axis=0), 4))
+print("Verification - Stds per column :", np.round(standardised_features.std(axis=0), 4))
+
+[OUTPUT LOGS]
+Raw Feature Matrix (10x3):
+ [[90.62 38.29 59.43]
+  [57.62 60.32 37.15]
+  [51.13 63.85 43.18]
+  [43.89 39.81 44.59]
+  [57.07 33.37 66.86]
+  [42.23 47.93 54.02]
+  [51.48 46.52 46.42]
+  [74.92 65.51 32.22]
+  [55.33 46.74 36.63]
+  [61.59 55.48 49.37]
+
+Standardised Output Matrix:
+ [[ 2.3789 -1.0963  1.173 ]
+  [ 0.0543  1.0268 -0.999 ]
+  [-0.4028  1.3688 -0.4111]
+  [-0.9128 -0.949   -0.2736]
+  [ 0.0155 -1.5728  1.8973]
+  [-1.0298 -0.1627  0.6455]
+  [-0.3781 -0.2993 -0.0952]
+  [ 1.2729  1.5298 -1.4796]
+  [-0.1069 -0.278   -1.0497]
+  [ 0.3338  0.5579  0.1924]]
+
+Verification - Means per column: [ 0. -0. -0.]
+Verification - Stds per column : [1. 1. 1.]
+==============================================================================
