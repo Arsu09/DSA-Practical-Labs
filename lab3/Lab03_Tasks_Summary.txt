@@ -1,0 +1,84 @@
+==============================================================================
+                  LAB 03: DATA HANDLING WITH PANDAS
+==============================================================================
+
+------------------------------------------------------------------------------
+TASK 1: Create DataFrame & Access Series
+------------------------------------------------------------------------------
+[CODE]
+import pandas as pd
+
+data = {'Name': ['Ali', 'Sara', 'Omar'], 'Age': [20, 22, 21]}
+df = pd.DataFrame(data)
+age_series = df['Age']
+
+print(df)
+print("Type:", type(age_series).__name__)
+print("Average Age:", age_series.mean())
+
+
+------------------------------------------------------------------------------
+TASK 2: Avoid Unnamed Index Column in CSV
+------------------------------------------------------------------------------
+[CODE]
+import pandas as pd
+
+df = pd.DataFrame({'Item': ['Pen', 'Pencil'], 'Price': [10, 5]})
+df.to_csv('clean_data.csv', index=False)
+
+saved_df = pd.read_csv('clean_data.csv')
+print(saved_df)
+
+
+------------------------------------------------------------------------------
+TASK 3: Standard 5-Command Data Inspection
+------------------------------------------------------------------------------
+[CODE]
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    'Score': [85, 90, np.nan, 88],
+    'Passed': [True, True, False, np.nan]
+})
+
+print("1. HEAD:\n", df.head(2))
+print("\n2. SHAPE:", df.shape)
+print("\n3. INFO:")
+df.info()
+print("\n4. DESCRIBE:\n", df.describe())
+print("\n5. MISSING VALUES:\n", df.isnull().sum())
+
+
+------------------------------------------------------------------------------
+TASK 4: Data Selection using loc and iloc
+------------------------------------------------------------------------------
+[CODE]
+import pandas as pd
+
+df = pd.DataFrame({'Marks': [70, 85, 90]}, index=['student1', 'student2', 'student3'])
+
+# Label-based selection
+print("Label Selection (loc):\n", df.loc['student2'])
+
+# Position-based selection
+print("\nPosition Selection (iloc):\n", df.iloc[1])
+
+
+------------------------------------------------------------------------------
+TASK 5: Read and Write Multiple File Formats
+------------------------------------------------------------------------------
+[CODE]
+import pandas as pd
+
+df = pd.DataFrame({'Product': ['Laptop', 'Mouse'], 'Price': [80000, 1500]})
+
+# Export to JSON and import back
+df.to_json('products.json')
+json_df = pd.read_json('products.json')
+
+# Convert and export as CSV
+json_df.to_csv('products.csv', index=False)
+print(pd.read_csv('products.csv'))
+
+==============================================================================
