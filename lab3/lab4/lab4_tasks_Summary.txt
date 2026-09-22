@@ -1,0 +1,64 @@
+New-Item -ItemType Directory -Path "lab4" -Force
+Set-Content -Path "lab4\Lab04_Tasks_Summary.txt" -Value @"
+==============================================================================
+         LAB 04: DATA VISUALIZATION WITH MATPLOTLIB AND SEABORN
+==============================================================================
+
+------------------------------------------------------------------------------
+TASK 1: Implementing the Object-Oriented Model
+------------------------------------------------------------------------------
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.plot([1, 2, 3], [4, 5, 6])
+plt.savefig('task1_plot.png', bbox_inches='tight')
+plt.show()
+
+------------------------------------------------------------------------------
+TASK 2: Visualizing Numeric Distribution
+------------------------------------------------------------------------------
+import matplotlib.pyplot as plt
+
+scores = [88, 92, 95, 70, 62, 88, 91, 84, 77, 82]
+fig, ax = plt.subplots()
+ax.hist(scores, bins=5)
+plt.savefig('task2_hist.png', bbox_inches='tight')
+plt.show()
+
+------------------------------------------------------------------------------
+TASK 3: High-Resolution Figure Export
+------------------------------------------------------------------------------
+fig.savefig('report_chart.png', dpi=150, bbox_inches='tight')
+
+------------------------------------------------------------------------------
+TASK 4: Categorical Comparison Plotting
+------------------------------------------------------------------------------
+import matplotlib.pyplot as plt
+
+categories = ['Apples', 'Bananas', 'Cherries']
+counts = [10, 15, 7]
+
+fig, ax = plt.subplots()
+ax.bar(categories, counts)
+plt.savefig('task4_bar.png', bbox_inches='tight')
+plt.show()
+
+------------------------------------------------------------------------------
+TASK 5: Relationship Analysis Reasoning
+------------------------------------------------------------------------------
+import matplotlib.pyplot as plt
+
+hours_studied = [2, 4, 5, 7, 8]
+exam_score = [50, 65, 70, 85, 90]
+
+fig, ax = plt.subplots()
+ax.scatter(hours_studied, exam_score)
+
+# Justification: A scatter plot is chosen over a line plot because it visualizes
+# the relationship/correlation between two numeric variables without assuming a continuous sequence or order.
+
+plt.savefig('task5_scatter.png', bbox_inches='tight')
+plt.show()
+
+==============================================================================
+"@
