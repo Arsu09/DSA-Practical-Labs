@@ -51,18 +51,18 @@
 
 
 
-def safe_convert(val):
-    """Convert value to int or return 'Invalid' if conversion fails."""
-    try:
-        return int(val)
-    except (ValueError, TypeError):
-        return 'Invalid'
+# def safe_convert(val):
+#     """Convert value to int or return 'Invalid' if conversion fails."""
+#     try:
+#         return int(val)
+#     except (ValueError, TypeError):
+#         return 'Invalid'
 
-# Table represented as a list of dicts
-data = [{'val': '10'}, {'val': '20'}, {'val': 'error'}, {'val': '30'}]
+# # Table represented as a list of dicts
+# data = [{'val': '10'}, {'val': '20'}, {'val': 'error'}, {'val': '30'}]
 
-# Process each record using list comprehension
-results = [safe_convert(item['val']) for item in data]
+# # Process each record using list comprehension
+# results = [safe_convert(item['val']) for item in data]
 
-print("Processed Table Results:")
-print(results)
+# print("Processed Table Results:")
+# print(results)

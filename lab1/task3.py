@@ -53,17 +53,17 @@
 
 
 
-import numpy as np
+# import numpy as np
 
-# 2D array representing test scores (3 students x 4 subjects)
-scores = np.array([
-    [80, 40, 90, 30],
-    [70, 60, 50, 80],
-    [20, 30, 40, 10]
-])
+# # 2D array representing test scores (3 students x 4 subjects)
+# scores = np.array([
+#     [80, 40, 90, 30],
+#     [70, 60, 50, 80],
+#     [20, 30, 40, 10]
+# ])
 
-# Extract all scores 60 or above using boolean indexing
-high_scores = scores[scores >= 60]
+# # Extract all scores 60 or above using boolean indexing
+# high_scores = scores[scores >= 60]
 
-print("Extracted Scores (>= 60):")
-print(high_scores)
+# print("Extracted Scores (>= 60):")
+# print(high_scores)

@@ -1,0 +1,124 @@
+# Ensure lab2 directory exists
+New-Item -ItemType Directory -Path "lab2" -Force
+
+# Create tasks.py inside lab2
+Set-Content -Path "lab2\tasks.py" -Value @"
+import numpy as np
+
+# Task 1: Integer Indexing and Reordering
+arr = np.array([10, 20, 30, 40, 50])
+task1_res = arr[[4, 0, 4]]
+print("Task 1 Output:")
+print(task1_res)
+
+# Task 2: Complex Boolean Masking
+data = np.array([15, 25, 35, 45, 55])
+task2_res = data[(data > 40) | (data < 20)]
+print("\nTask 2 Output:")
+print(task2_res)
+
+# Task 3: Dynamic Reshaping with Inferred Axis
+arr12 = np.arange(12)
+reshaped_arr = arr12.reshape(3, -1)
+print("\nTask 3 Output:")
+print("Reshaped Array:\n", reshaped_arr)
+print("Shape:", reshaped_arr.shape)
+
+# Task 4: Array Stacking Operations
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+v_res = np.vstack([a, b])
+h_res = np.hstack([a, b])
+print("\nTask 4 Output:")
+print("vstack:\n", v_res)
+print("hstack:", h_res)
+
+# Task 5: Data Pipeline Plumbing Challenge
+vec1 = np.array([10, 20, 30, 40, 50, 60]).reshape(-1, 1)
+vec2 = np.array([1, 2, 3, 4, 5, 6]).reshape(-1, 1)
+final_matrix = np.concatenate([vec1, vec2], axis=1)
+print("\nTask 5 Output:")
+print("Concatenated (6, 2) Matrix:\n", final_matrix)
+print("Shape:", final_matrix.shape)
+"@
+
+# Create Summary Text File inside lab2
+Set-Content -Path "lab2\Lab02_Tasks_Summary.txt" -Value @"
+==============================================================================
+            LAB 02: FANCY INDEXING, MASKS AND RESHAPING SUMMARY
+==============================================================================
+
+TASK 1: Integer Indexing and Reordering
+---------------------------------------
+Code:
+arr = np.array([10, 20, 30, 40, 50])
+print(arr[[4, 0, 4]])
+
+Output:
+[50 10 50]
+
+TASK 2: Complex Boolean Masking
+-------------------------------
+Code:
+data = np.array([15, 25, 35, 45, 55])
+print(data[(data > 40) | (data < 20)])
+
+Output:
+[15 45 55]
+
+TASK 3: Dynamic Reshaping with Inferred Axis
+--------------------------------------------
+Code:
+arr12 = np.arange(12)
+reshaped_arr = arr12.reshape(3, -1)
+print(reshaped_arr)
+print(reshaped_arr.shape)
+
+Output:
+[[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]]
+(3, 4)
+
+TASK 4: Array Stacking Operations
+---------------------------------
+Code:
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+print(np.vstack([a, b]))
+print(np.hstack([a, b]))
+
+Output:
+vstack:
+[[1 2 3]
+ [4 5 6]]
+hstack:
+[1 2 3 4 5 6]
+
+TASK 5: Data Pipeline Plumbing Challenge
+----------------------------------------
+Code:
+vec1 = np.array([10, 20, 30, 40, 50, 60]).reshape(-1, 1)
+vec2 = np.array([1, 2, 3, 4, 5, 6]).reshape(-1, 1)
+final_matrix = np.concatenate([vec1, vec2], axis=1)
+print(final_matrix)
+print(final_matrix.shape)
+
+Output:
+[[10  1]
+ [20  2]
+ [30  3]
+ [40  4]
+ [50  5]
+ [60  6]]
+Shape: (6, 2)
+==============================================================================
+"@
+
+# Execute to verify locally
+python lab2/tasks.py
+
+# Sync and Push to GitHub repository
+git add .
+git commit -m "Add completed Lab 02 Fancy Indexing, Masks and Reshaping tasks summary"
+git push origin main

@@ -52,16 +52,19 @@
 
 
 
-import numpy as np
+# import numpy as np
 
-# 1. Create 1-D array and reshape to 2-D column vector
-vec1 = np.array([10, 20, 30, 40, 50, 60]).reshape(-1, 1)
+# # 1. Create 1-D array and reshape to 2-D column vector
+# vec1 = np.array([10, 20, 30, 40, 50, 60]).reshape(-1, 1)
 
-# 2. Create second 2-D column vector
-vec2 = np.array([1, 2, 3, 4, 5, 6]).reshape(-1, 1)
+# # 2. Create second 2-D column vector
+# vec2 = np.array([1, 2, 3, 4, 5, 6]).reshape(-1, 1)
 
-# 3. Concatenate along axis 1 to produce a (6, 2) matrix
-final_matrix = np.concatenate([vec1, vec2], axis=1)
+# # 3. Concatenate along axis 1 to produce a (6, 2) matrix
+# final_matrix = np.concatenate([vec1, vec2], axis=1)
 
-print("Concatenated (6, 2) Array:\n", final_matrix)
-print("Final Shape:", final_matrix.shape)
+# print("Concatenated (6, 2) Array:\n", final_matrix)
+# print("Final Shape:", final_matrix.shape)
+
+
+

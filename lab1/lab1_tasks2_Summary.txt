@@ -1,0 +1,108 @@
+# Create script file inside lab1
+Set-Content -Path "lab1\tasks.py" -Value @"
+# Task 1: Representing a Data Record
+student = {
+    'name': 'Ali',
+    'score': 88,
+    'coordinates': (25.3960, 68.3578)
+}
+print("Task 1 Output:")
+print(student)
+
+# Task 2: Filtering Data with List Comprehensions
+raw_readings = [12.5, 45.0, 102.1, 8.2, 150.3, 33.7]
+filtered_readings = [r for r in raw_readings if r > 40.0]
+print("\nTask 2 Output:")
+print(filtered_readings)
+
+# Task 3: Transforming Data with Dictionary Comprehensions
+user_ids = [101, 102, 103]
+user_map = {uid: f"User_{uid}" for uid in user_ids}
+print("\nTask 3 Output:")
+print(user_map)
+
+# Task 4: Handling Dirty Data Gracefully
+def safe_convert(val):
+    try:
+        return int(val)
+    except (ValueError, TypeError):
+        return 'Invalid'
+
+print("\nTask 4 Output:")
+print("safe_convert('10'):", safe_convert('10'))
+print("safe_convert('N/A'):", safe_convert('N/A'))
+
+# Task 5: Processing a Table of Records
+data = [{'val': '10'}, {'val': '20'}, {'val': 'error'}, {'val': '30'}]
+results = [safe_convert(item['val']) for item in data]
+print("\nTask 5 Output:")
+print(results)
+"@
+
+# Update summary file
+Set-Content -Path "lab1\Lab01_Tasks_Summary.txt" -Value @"
+==============================================================================
+                    LAB 01: PYTHON FOR DATA SCIENCE
+==============================================================================
+
+TASK 1: Representing a Data Record
+----------------------------------
+Code:
+student = {'name': 'Ali', 'score': 88, 'coordinates': (25.3960, 68.3578)}
+print(student)
+
+Output:
+{'name': 'Ali', 'score': 88, 'coordinates': (25.3960, 68.3578)}
+
+TASK 2: Filtering Data with List Comprehensions
+-----------------------------------------------
+Code:
+raw_readings = [12.5, 45.0, 102.1, 8.2, 150.3, 33.7]
+filtered_readings = [r for r in raw_readings if r > 40.0]
+print(filtered_readings)
+
+Output:
+[45.0, 102.1, 150.3]
+
+TASK 3: Transforming Data with Dictionary Comprehensions
+-------------------------------------------------------
+Code:
+user_ids = [101, 102, 103]
+user_map = {uid: f"User_{uid}" for uid in user_ids}
+print(user_map)
+
+Output:
+{101: 'User_101', 102: 'User_102', 103: 'User_103'}
+
+TASK 4: Handling Dirty Data Gracefully
+--------------------------------------
+Code:
+def safe_convert(val):
+    try:
+        return int(val)
+    except (ValueError, TypeError):
+        return 'Invalid'
+
+print(safe_convert('10'))
+print(safe_convert('N/A'))
+
+Output:
+10
+Invalid
+
+TASK 5: Processing a Table of Records
+-------------------------------------
+Code:
+data = [{'val': '10'}, {'val': '20'}, {'val': 'error'}, {'val': '30'}]
+results = [safe_convert(item['val']) for item in data]
+print(results)
+
+Output:
+[10, 20, 'Invalid', 30]
+==============================================================================
+"@
+
+# Sync with GitHub
+git add .
+git commit -m "Update Lab 01 tasks and summary"
+git push origin main

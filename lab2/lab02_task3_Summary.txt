@@ -1,0 +1,112 @@
+# Create/Overwrite math_tasks.py inside lab2
+Set-Content -Path "lab2\math_tasks.py" -Value @"
+import numpy as np
+
+# Task 1: Element-wise Mathematical Functions
+arr = np.array([1, 2, 3, 4])
+exp_res = np.exp(arr)
+print("Task 1 Output:")
+print(exp_res)
+
+# Task 2: Finding the Index of Maximum Value
+probs = np.array([0.1, 0.7, 0.2])
+pred_class = probs.argmax()
+print("\nTask 2 Output:")
+print("Predicted Class Index:", pred_class)
+
+# Task 3: Element-wise vs Dot Product Comparison
+a = np.array([1, 2])
+b = np.array([3, 4])
+elem_mult = a * b
+dot_prod = a @ b
+print("\nTask 3 Output:")
+print("Element-wise multiply (a * b):", elem_mult)
+print("Dot product (a @ b):", dot_prod)
+
+# Task 4: Simulating Linear Regression Predictions
+X = np.array([[2, 1],
+              [4, 3],
+              [6, 5]])
+w = np.array([0.5, 2.0])
+preds = X @ w
+print("\nTask 4 Output:")
+print("Predictions (X @ w):", preds)
+
+# Task 5: Weighted Sum Equivalence
+weights = np.array([0.2, 0.5, 0.3])
+values = np.array([80, 90, 70])
+sum_elem = (weights * values).sum()
+dot_elem = weights @ values
+print("\nTask 5 Output:")
+print("sum(weights * values):", sum_elem)
+print("weights @ values:", dot_elem)
+print("Are both identical?:", np.isclose(sum_elem, dot_elem))
+"@
+
+# Update Summary File in lab2
+Set-Content -Path "lab2\Lab02_Math_Tasks_Summary.txt" -Value @"
+==============================================================================
+        LAB 02: MATHEMATICAL AND LINEAR ALGEBRA OPERATIONS SUMMARY
+==============================================================================
+
+TASK 1: Element-wise Mathematical Functions
+-------------------------------------------
+Code:
+arr = np.array([1, 2, 3, 4])
+print(np.exp(arr))
+
+Output:
+[ 2.71828183  7.3890561  20.08553692 54.59815003]
+
+TASK 2: Finding the Index of Maximum Value
+------------------------------------------
+Code:
+probs = np.array([0.1, 0.7, 0.2])
+print(probs.argmax())
+
+Output:
+1
+
+TASK 3: Element-wise vs Dot Product Comparison
+----------------------------------------------
+Code:
+a = np.array([1, 2])
+b = np.array([3, 4])
+print("Element-wise:", a * b)
+print("Dot product:", a @ b)
+
+Output:
+Element-wise: [3 8]
+Dot product: 11
+
+TASK 4: Simulating Linear Regression Predictions
+------------------------------------------------
+Code:
+X = np.array([[2, 1], [4, 3], [6, 5]])
+w = np.array([0.5, 2.0])
+print(X @ w)
+
+Output:
+[ 3.  8. 13.]
+
+TASK 5: Weighted Sum Equivalence
+--------------------------------
+Code:
+weights = np.array([0.2, 0.5, 0.3])
+values = np.array([80, 90, 70])
+print((weights * values).sum())
+print(weights @ values)
+
+Output:
+sum(weights * values): 78.0
+weights @ values: 78.0
+==============================================================================
+"@
+
+# Execute script to verify locally
+python lab2/math_tasks.py
+
+# Sync and push to GitHub repository
+git add .
+git commit -m "Add Lab 02 Mathematical and Linear Algebra Operations tasks"
+git push origin main

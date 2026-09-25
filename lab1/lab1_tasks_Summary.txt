@@ -1,0 +1,49 @@
+# Create/Overwrite script file in lab1 for NumPy tasks
+Set-Content -Path "lab1\numpy_tasks.py" -Value @"
+import numpy as np
+
+# Task 1: Array Inspection
+arr = np.array([10, 20, 30, 40, 50])
+print("Task 1 Output:")
+print("Array:", arr)
+print("Shape:", arr.shape)
+print("Dtype:", arr.dtype)
+
+# Task 2: Vectorised Arithmetic
+data = np.array([1, 2, 3, 4, 5])
+result = data * 10
+print("\nTask 2 Output:")
+print("Result:", result)
+
+# Task 3: Filtering with Boolean Masks
+np.random.seed(42)
+random_arr = np.random.randint(1, 100, size=6)
+mask = random_arr > 50
+filtered = random_arr[mask]
+print("\nTask 3 Output:")
+print("Random Array:", random_arr)
+print("Mask:", mask)
+print("Filtered Array:", filtered)
+
+# Task 4: Conditional Value Assignment
+vals = np.array([15, 42, 8, 91, 23])
+vals[vals < 20] = 0
+print("\nTask 4 Output:")
+print("Final Array:", vals)
+
+# Task 5: Applied Data Selection
+scores = np.array([[80, 40, 90, 30], 
+                   [70, 60, 50, 80], 
+                   [20, 30, 40, 10]])
+high_scores = scores[scores >= 60]
+print("\nTask 5 Output:")
+print("Scores >= 60:", high_scores)
+"@
+
+# Execute script to verify locally
+python lab1/numpy_tasks.py
+
+# Sync to GitHub repository
+git add .
+git commit -m "Add Lab 01 NumPy practical tasks and solutions"
+git push origin main

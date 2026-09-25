@@ -62,18 +62,19 @@
 
 
 
-import numpy as np
+# import numpy as np
 
-# Define weights and values arrays
-weights = np.array([0.2, 0.5, 0.3])
-values = np.array([80, 90, 70])
+# weights = np.array([0.2, 0.5, 0.3])
+# values = np.array([80, 90, 70])
 
-# Method 1: Sum of element-wise multiplication
-method1_result = (weights * values).sum()
+# method1_result = (weights * values).sum()
 
-# Method 2: Dot product operator (@)
-method2_result = weights @ values
+# method2_result = weights @ values
 
-print("Method 1 - sum(weights * values):", method1_result)
-print("Method 2 - weights @ values:", method2_result)
-print("Outputs are identical:", np.isclose(method1_result, method2_result))
+# print("Method 1 - sum(weights * values):", method1_result)
+# print("Method 2 - weights @ values:", method2_result)
+# print("Outputs are identical:", np.isclose(method1_result, method2_result))
+
+
+
+

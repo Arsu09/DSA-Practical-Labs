@@ -1,0 +1,141 @@
+# Ensure lab3 folder exists
+New-Item -ItemType Directory -Path "lab3" -Force
+
+# Create tasks.py in lab3
+Set-Content -Path "lab3\tasks.py" -Value @"
+import pandas as pd
+import numpy as np
+
+# Task 1: Identify and Remove Duplicate Rows
+df1 = pd.DataFrame({
+    'id': [1, 2, 1, 3],
+    'name': ['Ali', 'Sara', 'Ali', 'Omar']
+})
+dup_count = df1.duplicated().sum()
+df1_clean = df1.drop_duplicates()
+print("Task 1 Output:")
+print("Duplicate count:", dup_count)
+print("Clean DataFrame:\n", df1_clean)
+
+# Task 2: Convert Text-Based Numbers to Numeric
+df2 = pd.DataFrame({'price': ['10.5', '20.0', 'missing', '15.2']})
+df2['price'] = pd.to_numeric(df2['price'], errors='coerce')
+print("\nTask 2 Output:")
+print("dtypes:\n", df2.dtypes)
+print("DataFrame:\n", df2)
+
+# Task 3: Standardise Categorical Text Data
+df3 = pd.DataFrame({'name': [' Ali ', 'ali', 'ALI', 'Sara']})
+df3['name'] = df3['name'].str.strip().str.lower()
+print("\nTask 3 Output:")
+print(df3)
+
+# Task 4: Impute Missing Values for Model Training
+train = pd.DataFrame({'age': [22, np.nan, 35, 19, 40]})
+test = pd.DataFrame({'age': [np.nan, 28, 30]})
+train_median = train['age'].median()
+train['age'] = train['age'].fillna(train_median)
+test['age'] = test['age'].fillna(train_median)
+print("\nTask 4 Output:")
+print("Calculated Train Median:", train_median)
+print("Train DataFrame:\n", train)
+print("Test DataFrame:\n", test)
+
+# Task 5: Analytical Handling of Missing Data
+df5 = pd.DataFrame({
+    'ID': [101, np.nan, 103, 104, 105],
+    'Score': [88, 72, np.nan, 91, 60]
+})
+df5_clean = df5.dropna(subset=['ID']).copy()
+df5_clean['Score'] = df5_clean['Score'].fillna(df5_clean['Score'].mean())
+print("\nTask 5 Output:")
+print(df5_clean)
+"@
+
+# Create Summary File in lab3
+Set-Content -Path "lab3\Lab03_Tasks_Summary.txt" -Value @"
+==============================================================================
+        LAB 03: CLEANING MISSING, DUPLICATE AND MISTYPED DATA
+==============================================================================
+
+TASK 1: Identify and Remove Duplicate Rows
+------------------------------------------
+Code:
+df = pd.DataFrame({'id': [1, 2, 1, 3], 'name': ['Ali', 'Sara', 'Ali', 'Omar']})
+print("Duplicates:", df.duplicated().sum())
+print(df.drop_duplicates())
+
+Output:
+Duplicates: 1
+   id  name
+0   1   Ali
+1   2  Sara
+3   3  Omar
+
+TASK 2: Convert Text-Based Numbers to Numeric
+---------------------------------------------
+Code:
+df = pd.DataFrame({'price': ['10.5', '20.0', 'missing', '15.2']})
+df['price'] = pd.to_numeric(df['price'], errors='coerce')
+print(df.dtypes)
+print(df)
+
+Output:
+price    float64
+dtype: object
+   price
+0   10.5
+1   20.0
+2    NaN
+3   15.2
+
+TASK 3: Standardise Categorical Text Data
+-----------------------------------------
+Code:
+df = pd.DataFrame({'name': [' Ali ', 'ali', 'ALI', 'Sara']})
+df['name'] = df['name'].str.strip().str.lower()
+print(df)
+
+Output:
+   name
+0   ali
+1   ali
+2   ali
+3  sara
+
+TASK 4: Impute Missing Values for Model Training
+------------------------------------------------
+Code:
+train = pd.DataFrame({'age': [22, np.nan, 35, 19, 40]})
+test = pd.DataFrame({'age': [np.nan, 28, 30]})
+train_median = train['age'].median()
+train['age'] = train['age'].fillna(train_median)
+test['age'] = test['age'].fillna(train_median)
+
+Output:
+Train Median: 28.5
+
+TASK 5: Analytical Handling of Missing Data
+-------------------------------------------
+Code:
+df = pd.DataFrame({'ID': [101, np.nan, 103, 104, 105], 'Score': [88, 72, np.nan, 91, 60]})
+df = df.dropna(subset=['ID'])
+df['Score'] = df['Score'].fillna(df['Score'].mean())
+print(df)
+
+Output:
+      ID  Score
+0  101.0  88.00
+2  103.0  77.75
+3  104.0  91.00
+4  105.0  60.00
+==============================================================================
+"@
+
+# Execute to verify locally
+python lab3/tasks.py
+
+# Sync and Push to GitHub
+git add .
+git commit -m "Add Lab 03 Cleaning Missing, Duplicate and Mistyped Data tasks"
+git push origin main
