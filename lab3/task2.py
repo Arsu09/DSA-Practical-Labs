@@ -56,16 +56,29 @@
 # print(test)
 
 
+# import pandas as pd
+# import numpy as np
+
+# df = pd.DataFrame({
+#     'ID': [101, np.nan, 103, 104, 105],
+#     'Score': [88, 72, np.nan, 91, 60]
+# })
+
+# df_clean = df.dropna(subset=['ID']).copy()
+# df_clean['Score'] = df_clean['Score'].fillna(df_clean['Score'].mean())
+
+# print("Final DataFrame with mixed missing data strategy:")
+# print(df_clean)
+
+
+
 import pandas as pd
-import numpy as np
-
 df = pd.DataFrame({
-    'ID': [101, np.nan, 103, 104, 105],
-    'Score': [88, 72, np.nan, 91, 60]
+    'name':  ['ali', 'sara', 'omar', 'hina'],
+    'hours': [2, 8, 5, 1],
+    'score': [50, 88, 70, 40],
 })
-
-df_clean = df.dropna(subset=['ID']).copy()
-df_clean['Score'] = df_clean['Score'].fillna(df_clean['Score'].mean())
-
-print("Final DataFrame with mixed missing data strategy:")
-print(df_clean)
+print(df)
+col = df['score']
+print("\ntype of a column:", type(col).__name__)
+print("mean score:", col.mean())
