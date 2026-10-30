@@ -1,0 +1,127 @@
+# Create/Overwrite grouping_tasks.py inside lab3
+Set-Content -Path "lab3\grouping_tasks.py" -Value @"
+import pandas as pd
+import numpy as np
+
+# Task 1: Basic GroupBy Aggregation
+df1 = pd.DataFrame({
+    'region': ['North', 'South', 'North', 'East', 'South', 'East'],
+    'sales': [100, 200, 150, 300, 250, 400]
+})
+task1_res = df1.groupby('region')['sales'].sum()
+print("Task 1 Output:")
+print(task1_res)
+
+# Task 2: Multiple Aggregations with .agg()
+df2 = pd.DataFrame({
+    'batch': ['A', 'B', 'A', 'B', 'A', 'B'],
+    'score': [88, 72, 90, 60, 55, 95]
+})
+task2_res = df2.groupby('batch')['score'].agg(['mean', 'max', 'count'])
+print("\nTask 2 Output:")
+print(task2_res)
+
+# Task 3: Reshaping Data with Pivot Tables
+df3 = pd.DataFrame({
+    'batch':   ['A', 'A', 'B', 'B', 'A', 'B'],
+    'subject': ['math', 'cs', 'math', 'cs', 'math', 'cs'],
+    'score':   [88, 90, 60, 72, 55, 95]
+})
+task3_res = df3.pivot_table(index='batch', columns='subject', values='score', aggfunc='mean')
+print("\nTask 3 Output:")
+print(task3_res)
+
+# Task 4: Inner vs Left Merge Comparison
+df1_m = pd.DataFrame({'key': [1, 2, 3, 4], 'val1': ['A', 'B', 'C', 'D']})
+df2_m = pd.DataFrame({'key': [1, 2, 3], 'val2': ['X', 'Y', 'Z']})
+inner_res = pd.merge(df1_m, df2_m, on='key', how='inner')
+left_res = pd.merge(df1_m, df2_m, on='key', how='left')
+print("\nTask 4 Output:")
+print("Inner Merge Row Count:", len(inner_res))
+print("Left Merge Row Count:", len(left_res))
+
+# Task 5: Outer Merge Data Integrity
+df_a = pd.DataFrame({'key': [1, 2, 3], 'val_a': ['A1', 'A2', 'A3']})
+df_b = pd.DataFrame({'key': [2, 3, 4], 'val_b': ['B2', 'B3', 'B4']})
+outer_res = pd.merge(df_a, df_b, on='key', how='outer')
+print("\nTask 5 Output:")
+print(outer_res)
+"@
+
+# Update Summary File in lab3
+Set-Content -Path "lab3\Lab03_Assignment3_Summary.txt" -Value @"
+==============================================================================
+        LAB 03 (ASSIGNMENT 3): GROUPING, AGGREGATION AND COMBINING DATA
+==============================================================================
+
+TASK 1: Basic GroupBy Aggregation
+---------------------------------
+Code:
+df = pd.DataFrame({'region': ['North', 'South', 'North', 'East', 'South', 'East'], 'sales': [100, 200, 150, 300, 250, 400]})
+print(df.groupby('region')['sales'].sum())
+
+Output:
+region
+East     700
+North    250
+South    450
+
+TASK 2: Multiple Aggregations with .agg()
+-----------------------------------------
+Code:
+df = pd.DataFrame({'batch': ['A', 'B', 'A', 'B', 'A', 'B'], 'score': [88, 72, 90, 60, 55, 95]})
+print(df.groupby('batch')['score'].agg(['mean', 'max', 'count']))
+
+Output:
+            mean  max  count
+batch                       
+A      77.666667   90      3
+B      75.666667   95      3
+
+TASK 3: Reshaping Data with Pivot Tables
+----------------------------------------
+Code:
+df = pd.DataFrame({'batch': ['A', 'A', 'B', 'B', 'A', 'B'], 'subject': ['math', 'cs', 'math', 'cs', 'math', 'cs'], 'score': [88, 90, 60, 72, 55, 95]})
+print(df.pivot_table(index='batch', columns='subject', values='score', aggfunc='mean'))
+
+Output:
+subject  cs  math
+batch            
+A        90  71.5
+B        72  60.0
+
+TASK 4: Inner vs Left Merge Comparison
+--------------------------------------
+Code:
+df1 = pd.DataFrame({'key': [1, 2, 3, 4], 'val1': ['A', 'B', 'C', 'D']})
+df2 = pd.DataFrame({'key': [1, 2, 3], 'val2': ['X', 'Y', 'Z']})
+print("Inner count:", len(pd.merge(df1, df2, on='key', how='inner')))
+print("Left count:", len(pd.merge(df1, df2, on='key', how='left')))
+
+Output:
+Inner count: 3
+Left count: 4
+
+TASK 5: Outer Merge Data Integrity
+----------------------------------
+Code:
+df_a = pd.DataFrame({'key': [1, 2, 3], 'val_a': ['A1', 'A2', 'A3']})
+df_b = pd.DataFrame({'key': [2, 3, 4], 'val_b': ['B2', 'B3', 'B4']})
+print(pd.merge(df_a, df_b, on='key', how='outer'))
+
+Output:
+   key val_a val_b
+0    1    A1   NaN
+1    2    A2    B2
+2    3    A3    B3
+3    4   NaN    B4
+==============================================================================
+"@
+
+# Execute script to verify locally
+python lab3/grouping_tasks.py
+
+# Sync and push to GitHub repository
+git add .
+git commit -m "Add Lab 03 Assignment 3 Grouping Aggregation and Combining Data tasks"
+git push origin main

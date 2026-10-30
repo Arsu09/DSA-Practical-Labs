@@ -72,13 +72,13 @@
 
 
 
-import pandas as pd
-df = pd.DataFrame({
-    'name':  ['ali', 'sara', 'omar', 'hina'],
-    'hours': [2, 8, 5, 1],
-    'score': [50, 88, 70, 40],
-})
-print(df)
-col = df['score']
-print("\ntype of a column:", type(col).__name__)
-print("mean score:", col.mean())
+# import pandas as pd
+# df = pd.DataFrame({
+#     'name':  ['ali', 'sara', 'omar', 'hina'],
+#     'hours': [2, 8, 5, 1],
+#     'score': [50, 88, 70, 40],
+# })
+# print(df)
+# col = df['score']
+# print("\ntype of a column:", type(col).__name__)
+# print("mean score:", col.mean())

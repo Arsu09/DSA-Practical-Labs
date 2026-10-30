@@ -1,0 +1,49 @@
+# Create lab5_assignment2.py in root directory
+Set-Content -Path "lab5_assignment2.py" -Value @"
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+# Load dataset
+df = sns.load_dataset('tips')
+
+print("=== TASK 1: Visualizing Variable Distribution ===")
+fig, ax = plt.subplots(figsize=(6, 4))
+sns.histplot(df['total_bill'], kde=True, bins=25, ax=ax)
+ax.set_title('Distribution of Total Bill', fontsize=12, fontweight='bold')
+fig.savefig('task1_distribution.png', dpi=120, bbox_inches='tight')
+plt.close(fig)
+print("Saved task1_distribution.png directly in root workspace directory.")
+
+print("\n=== TASK 2: Implementing the IQR Outlier Rule ===")
+col = df['total_bill']
+q1, q3 = col.quantile(0.25), col.quantile(0.75)
+iqr = q3 - q1
+low, high = q1 - 1.5 * iqr, q3 + 1.5 * iqr
+iqr_outliers = df[(col < low) | (col > high)]
+print(f"Q1: {q1:.2f}, Q3: {q3:.2f}, IQR: {iqr:.2f}")
+print(f"Bounds: [{low:.2f}, {high:.2f}]")
+print(f"IQR Outliers Count: {len(iqr_outliers)}")
+print(iqr_outliers[['total_bill', 'tip']])
+
+print("\n=== TASK 3: Z-Score Outlier Detection ===")
+# Using tip_pct or total_bill for z-score calculation
+z_scores = (col - col.mean()) / col.std()
+z_outliers = df[np.abs(z_scores) > 3]
+print(f"Z-Score Outliers Count (|z| > 3): {len(z_outliers)}")
+print(z_outliers[['total_bill', 'tip']])
+
+print("\n=== TASK 4: Comparing IQR and Z-Score Results ===")
+print(f"IQR Outlier Count: {len(iqr_outliers)}")
+print(f"Z-Score Outlier Count: {len(z_outliers)}")
+
+print("\n=== TASK 5: Outlier Investigation and Decision ===")
+max_outlier = iqr_outliers.sort_values(by='total_bill', ascending=False).iloc[0]
+print(f"Selected Outlier Value: total_bill = ${max_outlier['total_bill']:.2f}, tip = ${max_outlier['tip']:.2f}")
+"@
+
+# Execute script
+python lab5_assignment2.py

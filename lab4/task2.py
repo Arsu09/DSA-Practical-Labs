@@ -76,18 +76,18 @@
 
 
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
-categories = ['Dept 1', 'Dept 2', 'Dept 3', 'Dept 4']
-values = [45, 60, 52, 70]
+# categories = ['Dept 1', 'Dept 2', 'Dept 3', 'Dept 4']
+# values = [45, 60, 52, 70]
 
-fig, ax = plt.subplots()
+# fig, ax = plt.subplots()
 
-# Data-ink principle: Use a single, consistent color for a single series
-ax.bar(categories, values, color='steelblue')
+# # Data-ink principle: Use a single, consistent color for a single series
+# ax.bar(categories, values, color='steelblue')
 
-ax.set_title('Departmental Resource Allocation')
-ax.set_xlabel('Department')
-ax.set_ylabel('Budget Allocated ($k)')
+# ax.set_title('Departmental Resource Allocation')
+# ax.set_xlabel('Department')
+# ax.set_ylabel('Budget Allocated ($k)')
 
-plt.show()
+# plt.show()

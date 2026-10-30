@@ -48,12 +48,14 @@
 
 
 
-import pandas as pd
+# import pandas as pd
 
-df_a = pd.DataFrame({'key': [1, 2, 3], 'val_a': ['A1', 'A2', 'A3']})
-df_b = pd.DataFrame({'key': [2, 3, 4], 'val_b': ['B2', 'B3', 'B4']})
+# df_a = pd.DataFrame({'key': [1, 2, 3], 'val_a': ['A1', 'A2', 'A3']})
+# df_b = pd.DataFrame({'key': [2, 3, 4], 'val_b': ['B2', 'B3', 'B4']})
 
-outer_merged = pd.merge(df_a, df_b, on='key', how='outer')
+# outer_merged = pd.merge(df_a, df_b, on='key', how='outer')
 
-print("Outer Merge Result (Missing values filled with NaN):")
-print(outer_merged)
+# print("Outer Merge Result (Missing values filled with NaN):")
+# print(outer_merged)
+
+

@@ -1,0 +1,43 @@
+# Create/Overwrite lab5 directory & run script
+Set-Content -Path "lab5_all_tasks.py" -Value @"
+import pandas as pd
+import seaborn as sns
+import numpy as np
+
+pd.set_option('display.width', 120)
+
+# Load Dataset
+df = sns.load_dataset('tips')
+
+print("=== TASK 1: Initial Dataset Inspection ===")
+df.info()
+print("\nDESCRIBE:\n", df.describe())
+
+print("\n=== TASK 2: Categorical Distribution Analysis ===")
+print("Value Counts for 'day':")
+print(df['day'].value_counts())
+print("\nProportions:")
+print(df['day'].value_counts(normalize=True).round(2))
+
+print("\n=== TASK 3: Measuring Data Shape and Skew ===")
+m = df['total_bill'].mean()
+med = df['total_bill'].median()
+sk = df['total_bill'].skew()
+print(f"total_bill -> Mean: {m:.2f}, Median: {med:.2f}, Skewness: {sk:.2f}")
+
+print("\n=== TASK 4: Calculating Spread and IQR ===")
+std_dev = df['total_bill'].std()
+q25, q75 = df['total_bill'].quantile([0.25, 0.75])
+iqr = q75 - q25
+print(f"Standard Deviation: {std_dev:.2f}")
+print(f"25th Percentile (Q1): {q25:.2f}")
+print(f"75th Percentile (Q3): {q75:.2f}")
+print(f"IQR (Q3 - Q1): {iqr:.2f}")
+
+print("\n=== TASK 5: Grouped Descriptive Summaries ===")
+grouped_summary = df.groupby('day')['total_bill'].describe().round(2)
+print(grouped_summary)
+"@
+
+# Run the python script
+python lab5_all_tasks.py

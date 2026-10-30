@@ -1,0 +1,120 @@
+# Create lab4 directory if it doesn't exist
+New-Item -ItemType Directory -Path "lab4" -Force
+
+# Create tasks.py inside lab4
+Set-Content -Path "lab4\tasks.py" -Value @"
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Task 1: Basic Chart Labeling
+x = [1, 2, 3, 4, 5]
+y = [10, 25, 35, 42, 50]
+
+fig1, ax1 = plt.subplots()
+ax1.plot(x, y, marker='o', label='Growth Trajectory')
+ax1.set_title('Product Adoption Rate Over Time')
+ax1.set_xlabel('Time (Months)')
+ax1.set_ylabel('Users (in Thousands)')
+ax1.legend()
+fig1.savefig('lab4/task1_labeled.png', dpi=120, bbox_inches='tight')
+plt.close(fig1)
+
+# Task 2: Accessible Multi-Series Plotting
+weeks = [1, 2, 3, 4, 5]
+series_a = [50, 55, 65, 70, 85]
+series_b = [40, 48, 52, 60, 68]
+
+fig2, ax2 = plt.subplots()
+ax2.plot(weeks, series_a, color='tab:blue', linestyle='-', marker='o', label='Group A')
+ax2.plot(weeks, series_b, color='tab:orange', linestyle='--', marker='s', label='Group B')
+ax2.set_title('Group Performance (Accessible View)')
+ax2.set_xlabel('Week')
+ax2.set_ylabel('Score (%)')
+ax2.legend()
+fig2.savefig('lab4/task2_accessible.png', dpi=120, bbox_inches='tight')
+plt.close(fig2)
+
+# Task 3: Ensuring Bar Chart Honesty
+categories = ['Product A', 'Product B', 'Product C']
+sales = [98, 100, 99]
+
+fig3, ax3 = plt.subplots()
+ax3.bar(categories, sales, color='skyblue')
+ax3.set_ylim(bottom=0)  # Honest baseline at 0
+ax3.set_title('Honest Sales Comparison Across Products')
+ax3.set_xlabel('Products')
+ax3.set_ylabel('Units Sold')
+fig3.savefig('lab4/task3_honest_bar.png', dpi=120, bbox_inches='tight')
+plt.close(fig3)
+
+# Task 4: Annotating Points of Interest
+x_sc = [1, 2, 3, 4, 5, 6, 7]
+y_sc = [12, 15, 14, 45, 18, 16, 13]  # Anomaly at index 3 (x=4)
+
+fig4, ax4 = plt.subplots()
+ax4.scatter(x_sc, y_sc, color='tab:purple', s=50)
+ax4.annotate('Traffic Spike', xy=(4, 45), xytext=(2.5, 40),
+             arrowprops=dict(arrowstyle='->', color='black', lw=1.5))
+ax4.set_title('Network Request Monitoring')
+ax4.set_xlabel('Hour')
+ax4.set_ylabel('Requests per Second')
+fig4.savefig('lab4/task4_annotation.png', dpi=120, bbox_inches='tight')
+plt.close(fig4)
+
+# Task 5: Applying Data-Ink Principles
+categories_5 = ['Dept 1', 'Dept 2', 'Dept 3', 'Dept 4']
+values_5 = [45, 60, 52, 70]
+
+fig5, ax5 = plt.subplots()
+ax5.bar(categories_5, values_5, color='steelblue')  # Single consistent color
+ax5.set_title('Departmental Resource Allocation')
+ax5.set_xlabel('Department')
+ax5.set_ylabel('Budget Allocated ($k)')
+fig5.savefig('lab4/task5_dataink.png', dpi=120, bbox_inches='tight')
+plt.close(fig5)
+
+print("All Lab 4 Task plots successfully generated and saved in lab4/")
+"@
+
+# Create Summary File in lab4
+Set-Content -Path "lab4\Lab04_Tasks_Summary.txt" -Value @"
+==============================================================================
+        LAB 04: DATA VISUALIZATION - CUSTOMISING PLOTS FOR CLARITY
+==============================================================================
+
+TASK 1: Basic Chart Labeling
+----------------------------
+Adds a descriptive title, axis labels with units, and a legend.
+Output File: lab4/task1_labeled.png
+
+TASK 2: Accessible Multi-Series Plotting
+----------------------------------------
+Uses redundant encoding (distinct colors + line styles + markers) for accessibility.
+Output File: lab4/task2_accessible.png
+
+TASK 3: Ensuring Bar Chart Honesty
+----------------------------------
+Enforces `ax.set_ylim(bottom=0)` to avoid misrepresenting relative magnitudes.
+Output File: lab4/task3_honest_bar.png
+
+TASK 4: Annotating Points of Interest
+-------------------------------------
+Highlights specific anomalies/peaks directly using `ax.annotate()`.
+Output File: lab4/task4_annotation.png
+
+TASK 5: Applying Data-Ink Principles
+------------------------------------
+Eliminates unnecessary color variations for a single data series to minimize noise.
+Output File: lab4/task5_dataink.png
+==============================================================================
+"@
+
+# Execute script to generate image files locally
+python lab4/tasks.py
+
+# Sync and push to GitHub repository
+git add .
+git commit -m "Add Lab 04 Customising Plots for Clarity tasks and generated images"
+git push origin main
