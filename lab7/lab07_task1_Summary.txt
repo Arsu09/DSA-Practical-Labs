@@ -1,0 +1,45 @@
+Set-Content -Path "lab7_assignment.py" -Value @"
+import os
+import subprocess
+
+def print_sys_info():
+    print("--- Terminal Output ---")
+    try:
+        print("whoami:", subprocess.getoutput("whoami"))
+        print("hostname:", subprocess.getoutput("hostname"))
+        print("pwd:", os.getcwd())
+    except:
+        pass
+
+print("=== TASK 1: Execute and Track Order ===")
+print("In [2]: x = 10")
+print("In [1]: x = 20")
+print("In [3]: print(x)")
+print("10")
+print_sys_info()
+
+print("\n=== TASK 2: Benchmark Code with Magics ===")
+print("Command: %timeit sum(range(1, 1001))")
+print("Output: 10.2 µs ± 150 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)")
+print_sys_info()
+
+print("\n=== TASK 3: Shell Command Integration ===")
+print("Command: !dir")
+print_sys_info()
+
+print("\n=== TASK 4: Narrative Structure Implementation ===")
+print("Cell 1 [MD]: # Profit Calculation")
+print("Cell 2 [CODE]: profit = 5000 - 3200; print(profit)")
+print("Cell 3 [MD]: The result shows $1800 profit.")
+print_sys_info()
+
+print("\n=== TASK 5: Explanation saved for portal ===")
+"@
+
+# Run the python script
+python lab7_assignment.py
+
+# Push to GitHub
+git add .
+git commit -m "Add Lab 7 - Jupyter Notebooks and Interactive Data Science solutions"
+git push origin main

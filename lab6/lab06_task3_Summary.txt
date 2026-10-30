@@ -1,0 +1,55 @@
+Set-Content -Path "lab6_assignment3.py" -Value @"
+import numpy as np
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.datasets import make_classification
+from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+import os
+import subprocess
+
+def print_sys_info():
+    print("--- Terminal Output ---")
+    try:
+        print("whoami:", subprocess.getoutput("whoami"))
+        print("hostname:", subprocess.getoutput("hostname"))
+        print("pwd:", os.getcwd())
+    except:
+        pass
+
+print("=== TASK 1: Generate a Classification Report ===")
+y_true_1 = [0, 0, 0, 0, 0, 0, 1, 1, 1, 1]
+y_pred_1 = [0, 0, 0, 0, 1, 1, 1, 1, 0, 0]
+print(classification_report(y_true_1, y_pred_1))
+print_sys_info()
+
+print("\n=== TASK 2: Compute the Confusion Matrix ===")
+y_true_2 = [0]*15 + [1]*5
+y_pred_2 = [0]*13 + [1]*2 + [0]*3 + [1]*2
+cm = confusion_matrix(y_true_2, y_pred_2)
+print("Confusion Matrix:\n", cm)
+print_sys_info()
+
+print("\n=== TASK 3: Cross-Validation with Custom Scoring ===")
+X3, y3 = make_classification(n_samples=100, n_features=4, random_state=42)
+f1_scores = cross_val_score(LogisticRegression(), X3, y3, cv=5, scoring='f1')
+print("F1 Scores per fold:", f1_scores)
+print_sys_info()
+
+print("\n=== TASK 4: Leak-Free Pipeline Evaluation ===")
+pipe = make_pipeline(StandardScaler(), LogisticRegression())
+pipe_scores = cross_val_score(pipe, X3, y3, cv=5, scoring='accuracy')
+print("Pipeline CV Scores:", pipe_scores)
+print_sys_info()
+
+print("\n=== TASK 5: Explanation saved for portal ===")
+"@
+
+# Run the python script
+python lab6_assignment3.py
+
+# Push to GitHub
+git add .
+git commit -m "Add Lab 6 Assignment 3 - Evaluation, Confusion Matrix and Metrics"
+git push origin main
